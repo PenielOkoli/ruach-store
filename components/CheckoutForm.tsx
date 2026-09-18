@@ -21,16 +21,9 @@ export default function CheckoutForm() {
     setIsSubmitting(true);
     
     const formData = new FormData(formRef.current);
-    const formId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID;
-
-    if (!formId) {
-      alert('Order form is not configured yet. Please contact the store.');
-      setIsSubmitting(false);
-      return;
-    }
 
     try {
-      const response = await fetch(`https://formspree.io/f/xgavvwlg`, {
+      const response = await fetch('https://formspree.io/f/xgavvwlg', {
         method: 'POST',
         body: formData,
         headers: { 'Accept': 'application/json' }
