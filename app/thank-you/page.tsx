@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Script from 'next/script';
 
 export default function ThankYouPage() {
-  const whatsappNumber = "2348107945423"; 
+  const whatsappNumber = "2347030695474";
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=Hi%2C%20I%20just%20placed%20an%20order%20for%20the%20cordless%20pressure%20washer%20on%20your%20website.%20I%20would%20like%20to%20confirm%20my%20delivery%20details.`;
 
   return (
