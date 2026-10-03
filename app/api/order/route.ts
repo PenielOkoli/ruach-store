@@ -25,7 +25,7 @@ export async function POST(request: Request) {
       formData.set(key, String(value));
     }
 
-    const formspreeResponse = await fetch('https://formspree.io/f/xgaebwaj', {
+    const formspreeResponse = await fetch('https://formspree.io/f/xgavvwlg', {
       method: 'POST',
       body: formData,
       headers: { Accept: 'application/json' },
