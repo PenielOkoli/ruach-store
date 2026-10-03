@@ -93,7 +93,7 @@ export default function CheckoutForm() {
   };
 
   return (
-    <div className="w-full text-left relative">
+    <div className="checkout-form w-full text-left relative">
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-md">
           <div className="bg-white rounded-2xl p-6 md:p-8 max-w-md w-full shadow-2xl animate-in fade-in zoom-in duration-200">

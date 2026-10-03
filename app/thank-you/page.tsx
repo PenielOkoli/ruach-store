@@ -43,7 +43,7 @@ function ThankYouContent() {
   }, [eventId, orderQuantity, orderValue, productName, searchParams]);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center pt-12 px-4 pb-20 font-sans">
+    <div className="ruach-confirmation min-h-screen bg-gray-50 flex flex-col items-center pt-12 px-4 pb-20 font-sans">
 
       {/* Order Status Badge */}
       <div className="flex items-center gap-4 mb-8 w-full max-w-lg">
