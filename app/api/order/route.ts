@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const pixelId = '27969101282788744';
+const pixelId = '4630814730482514';
 
 function sha256(value: string) {
   return crypto.subtle.digest('SHA-256', new TextEncoder().encode(value));
