@@ -20,7 +20,7 @@ export default function ThankYouPage() {
 
 function ThankYouContent() {
   const searchParams = useSearchParams();
-  const whatsappNumber = "2348107945423";
+  const whatsappNumber = "2347030695474";
   const productName = searchParams.get('product') || 'glass food storage set';
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hi, I just placed an order for the ${productName} on your website. I would like to confirm my delivery details.`)}`;
   const orderValue = Number(searchParams.get('value')) || 135000;
