@@ -1,16 +1,8 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-## Ruach Store
-
-Ruach Store is a Next.js storefront for the cordless pressure washer, forked from the original store with its own brand direction and integration configuration.
 
 ## Getting Started
 
 First, run the development server:
-Create `.env.local` from `.env.example` and set Ruach's Formspree form ID, Facebook Pixel ID, and optional webhook URL. The pixel and checkout form stay disabled until their values are configured.
-
-Run the development server:
-Open [http://localhost:3000](http://localhost:3000) to see the result.
-The project uses `next/font` to load DM Sans and supports deployment on Vercel or any Node-compatible Next.js host.
 
 ```bash
 npm run dev
