@@ -6,7 +6,7 @@ import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "TC Store - Large Glass Food Storage Sets",
+  title: "Ruach Store - Large Glass Food Storage Sets",
   description: "Shop airtight glass food storage sets with 1L, 2L, and 2.5L containers. Pay on delivery nationwide.",
   icons: {
     icon: "/favicon.ico",

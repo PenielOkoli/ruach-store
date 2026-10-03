@@ -27,7 +27,7 @@ function CheckIcon() {
 export default function StorageCollectionPage() {
   return (
     <div className="storefront collection-storefront">
-      <header className="site-header"><div className="shell header-inner"><a className="logo" href="#top">TC <span>Store</span></a><nav className="site-nav" aria-label="Main navigation"><a href="#collection">Bundles</a><a href="#sizes">Sizes</a><a href="#why-glass">Why glass</a></nav><a className="header-cta" href="#order">Shop bundles <span aria-hidden="true">→</span></a></div></header>
+      <header className="site-header"><div className="shell header-inner"><a className="logo" href="#top">Ruach <span>Store</span></a><nav className="site-nav" aria-label="Main navigation"><a href="#collection">Bundles</a><a href="#sizes">Sizes</a><a href="#why-glass">Why glass</a></nav><a className="header-cta" href="#order">Shop bundles <span aria-hidden="true">→</span></a></div></header>
       <main id="top">
         <section className="collection-hero shell">
           <div className="collection-hero-copy"><p className="eyebrow"><span className="eyebrow-dot" /> New larger sizes are here</p><h1>Big-batch storage, <em>made beautiful.</em></h1><p className="hero-lede">Meet the glass containers your kitchen has been waiting for: 1L, 2L, and a generous 2.5L. Choose the bundle that fits the way your family cooks.</p><div className="hero-price"><span>Sets from</span><strong>{formatNaira(85000)}</strong><small>Save up to {formatNaira(50000)}</small></div><div className="hero-actions"><a className="primary-button" href="#collection">See all bundles <span aria-hidden="true">↓</span></a><a className="text-link" href="#sizes">Compare sizes</a></div><div className="trust-row"><span>✓ Pay on delivery</span><span>✓ Free nationwide delivery</span><span>✓ Airtight locking lids</span></div></div>
@@ -46,7 +46,7 @@ export default function StorageCollectionPage() {
 
         <section id="order" className="order-section"><div className="shell"><div className="order-heading"><p className="eyebrow">Order your storage set today</p><h2>Your kitchen upgrade<br /><em>starts here.</em></h2><p>Select a bundle below. You pay only when it arrives, and we&apos;ll call to confirm your delivery details.</p></div><div className="order-card"><CheckoutForm /></div></div></section>
       </main>
-      <footer><div className="shell footer-inner"><a className="logo" href="#top">TC <span>Store</span></a><p>© 2026 TC Store Ltd · Pay on delivery across Nigeria</p></div></footer>
+      <footer><div className="shell footer-inner"><a className="logo" href="#top">Ruach <span>Store</span></a><p>© 2026 Ruach Store Ltd · Pay on delivery across Nigeria</p></div></footer>
     </div>
   );
 }
