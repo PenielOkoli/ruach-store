@@ -6,8 +6,8 @@ import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Ruach Store - Large Glass Food Storage Sets",
-  description: "Shop airtight glass food storage sets with 1L, 2L, and 2.5L containers. Pay on delivery nationwide.",
+  title: "Ruach Store - 12-Piece Glass Storage Set",
+  description: "Keep your food fresh, organized, and safe with a 12-piece borosilicate glass storage set.",
   icons: {
     icon: "/favicon.ico",
   },
@@ -40,8 +40,6 @@ export default function RootLayout({
       <body className={inter.className}>
         {children}
         <noscript>
-          {/* The tracking pixel must remain a plain image for no-JavaScript visits. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             height="1"
             width="1"
