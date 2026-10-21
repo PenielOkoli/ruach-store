@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 
 declare global {
@@ -19,8 +19,22 @@ const orderOptions = {
 export default function CheckoutForm() {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const [showModal, setShowModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!showModal || !dialog) return;
+
+    dialog.showModal();
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      dialog.close();
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [showModal]);
 
   const handleInitialSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -79,13 +93,11 @@ export default function CheckoutForm() {
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto p-0 md:p-8 bg-transparent md:bg-white text-left relative">
+    <div className="checkout-form">
 
       {/* Confirmation Modal */}
-      {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30 backdrop-blur-md">
-          <div className="bg-white rounded-2xl p-6 md:p-8 max-w-md w-full shadow-2xl animate-in fade-in zoom-in duration-200">
-            <h2 className="text-2xl font-extrabold text-center mb-4">Confirm Your Order</h2>
+      <dialog ref={dialogRef} className="order-confirmation" aria-labelledby="confirm-order-title" onCancel={() => setShowModal(false)} onClose={() => setShowModal(false)}>
+            <h2 id="confirm-order-title" className="text-2xl font-extrabold text-center mb-4">Confirm Your Order</h2>
             <div className="space-y-4 text-sm md:text-base text-gray-700 text-center">
               <p>We spend a lot of money packaging orders and delivering products across Nigeria.</p>
               <p>To help us serve our customers better, we kindly ask that you only submit this order if you are ready to receive and pay for your 12-piece glass container carton upon delivery.</p>
@@ -94,43 +106,43 @@ export default function CheckoutForm() {
             </div>
             <div className="flex gap-4 mt-8">
               <button
+                type="button"
                 onClick={() => setShowModal(false)}
-                className="w-1/2 py-3 rounded-lg border border-gray-300 text-gray-700 font-bold hover:bg-gray-50 transition-colors"
+                className="cancel-order w-1/2 py-3 rounded-lg border border-gray-300 text-gray-700 font-bold hover:bg-gray-50 transition-colors"
               >
                 No
               </button>
               <button
+                type="button"
                 onClick={confirmAndSubmit}
                 className="w-1/2 py-3 rounded-lg bg-orange-600 text-white font-bold hover:bg-orange-700 transition-colors shadow-md"
               >
                 Yes, Submit
               </button>
             </div>
-          </div>
-        </div>
-      )}
+      </dialog>
 
-      <form ref={formRef} onSubmit={handleInitialSubmit} className="space-y-6">
+      <form ref={formRef} onSubmit={handleInitialSubmit}>
         {/* Contact Info */}
         <div>
-          <label className="block text-sm text-gray-700 mb-1">Your name</label>
-          <input type="text" name="Full Name" required placeholder="Your Name" className="w-full p-3 border border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-600 outline-none" />
+          <label htmlFor="full-name" className="block text-sm text-gray-700 mb-1">Your name</label>
+          <input type="text" id="full-name" autoComplete="name" name="Full Name" required placeholder="Your Name" className="w-full p-3 border border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-600 outline-none" />
         </div>
 
         <div>
-          <label className="block text-sm text-gray-700 mb-1">Your phone number</label>
-          <input type="tel" name="Phone Number" required placeholder="08012345678" className="w-full p-3 border border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-600 outline-none" />
+          <label htmlFor="phone-number" className="block text-sm text-gray-700 mb-1">Your phone number</label>
+          <input type="tel" id="phone-number" autoComplete="tel" name="Phone Number" required placeholder="08012345678" className="w-full p-3 border border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-600 outline-none" />
         </div>
 
         <div>
-          <label className="block text-sm text-gray-700 mb-1">Alternative phone number (Optional)</label>
-          <input type="tel" name="Alternative Phone" placeholder="08012345678" className="w-full p-3 border border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-600 outline-none" />
+          <label htmlFor="alternative-phone" className="block text-sm text-gray-700 mb-1">Alternative phone number (Optional)</label>
+          <input type="tel" id="alternative-phone" autoComplete="off" name="Alternative Phone" placeholder="08012345678" className="w-full p-3 border border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-600 outline-none" />
         </div>
 
         {/* Location Info */}
         <div>
-          <label className="block text-sm text-gray-700 mb-1">Your state of delivery</label>
-          <select name="State" required className="w-full p-3 border border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-600 outline-none bg-white">
+          <label htmlFor="delivery-state" className="block text-sm text-gray-700 mb-1">Your state of delivery</label>
+          <select id="delivery-state" autoComplete="address-level1" name="State" required className="w-full p-3 border border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-600 outline-none bg-white">
             <option value="">Select your state</option>
             <option value="Abia">Abia</option>
             <option value="Adamawa">Adamawa</option>
@@ -173,54 +185,31 @@ export default function CheckoutForm() {
         </div>
 
         <div>
-          <label className="block text-sm text-gray-700 mb-1">Your city</label>
-          <input type="text" name="City" required placeholder="Your city" className="w-full p-3 border border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-600 outline-none" />
+          <label htmlFor="delivery-city" className="block text-sm text-gray-700 mb-1">Your city</label>
+          <input type="text" id="delivery-city" autoComplete="address-level2" name="City" required placeholder="Your city" className="w-full p-3 border border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-600 outline-none" />
         </div>
 
         <div>
-          <label className="block text-sm text-gray-700 mb-1">Detailed delivery address</label>
-          <input type="text" name="Address" required placeholder="House number, street, landmark..." className="w-full p-3 border border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-600 outline-none" />
+          <label htmlFor="delivery-address" className="block text-sm text-gray-700 mb-1">Detailed delivery address</label>
+          <input type="text" id="delivery-address" autoComplete="street-address" name="Address" required placeholder="House number, street, landmark..." className="w-full p-3 border border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-600 outline-none" />
         </div>
 
         {/* Package Selection */}
-        <div className="pt-4">
-          <h3 className="font-bold text-xl text-center mb-6">Select your quantity</h3>
-          <div className="space-y-4">
-            <label className="flex items-center justify-between p-3 md:p-4 border border-gray-200 rounded-lg cursor-pointer bg-white hover:border-orange-600 transition-colors">
-              <div className="flex items-center gap-3">
-                <input type="radio" name="Quantity" value="1 Carton of 12pcs Glass Container (₦135,000)" required className="w-4 h-4 text-orange-600" defaultChecked />
-                <span className="font-medium text-sm md:text-base text-gray-700 uppercase">Buy 1 Carton of 12pcs</span>
-              </div>
-              <span className="font-bold text-orange-600">₦135,000</span>
-            </label>
-
-            <label className="flex items-center justify-between p-3 md:p-4 border border-orange-300 rounded-lg cursor-pointer relative bg-orange-50/30 hover:border-orange-600 transition-colors">
-              <div className="flex items-center gap-3">
-                <input type="radio" name="Quantity" value="2 Cartons of 12pcs Glass Container (₦261,000)" required className="w-4 h-4 text-orange-600" />
-                <span className="font-medium text-sm md:text-base text-gray-700 uppercase">Buy 2 Cartons of 12pcs</span>
-              </div>
-              <div className="flex items-center gap-2">
-                 <span className="font-bold text-orange-600">₦261,000</span>
-              </div>
-            </label>
-
-            <label className="flex items-center justify-between p-3 md:p-4 border border-gray-200 rounded-lg cursor-pointer bg-white hover:border-orange-600 transition-colors">
-              <div className="flex items-center gap-3">
-                <input type="radio" name="Quantity" value="3 Cartons of 12pcs Glass Container (₦394,000)" required className="w-4 h-4 text-orange-600" />
-                <span className="font-medium text-sm md:text-base text-gray-700 uppercase">Buy 3 Cartons of 12pcs</span>
-              </div>
-              <span className="font-bold text-orange-600">₦394,000</span>
-            </label>
-
-            <label className="flex items-center justify-between p-3 md:p-4 border border-gray-200 rounded-lg cursor-pointer bg-white hover:border-orange-600 transition-colors">
-              <div className="flex items-center gap-3">
-                <input type="radio" name="Quantity" value="4 Cartons of 12pcs Glass Container (₦522,000)" required className="w-4 h-4 text-orange-600" />
-                <span className="font-medium text-sm md:text-base text-gray-700 uppercase">Buy 4 Cartons of 12pcs</span>
-              </div>
-              <span className="font-bold text-orange-600">₦522,000</span>
-            </label>
+        <fieldset className="quantity-options">
+          <legend>Select your quantity</legend>
+          <div className="quantity-list">
+            {Object.entries(orderOptions).map(([value, order]) => (
+              <label className="quantity-option" key={value}>
+                <input type="radio" name="Quantity" value={value} required defaultChecked={order.quantity === 1} />
+                <span className="quantity-description">
+                  {order.quantity} {order.quantity === 1 ? 'carton' : 'cartons'}
+                  <small>12 pieces per carton</small>
+                </span>
+                <span className="quantity-price">{new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', maximumFractionDigits: 0 }).format(order.value)}</span>
+              </label>
+            ))}
           </div>
-        </div>
+        </fieldset>
 
         <button type="submit" disabled={isSubmitting} className="w-full bg-orange-600 text-white font-bold py-4 rounded-lg hover:bg-orange-700 transition-colors disabled:opacity-70 mt-6 shadow-md">
           {isSubmitting ? 'Processing Order...' : 'Order Now — Free Delivery'}
