@@ -1,0 +1,110 @@
+.section {
+  padding-block: 96px;
+  background: var(--paper);
+}
+
+.intro {
+  max-width: 850px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin: 0 0 26px;
+  padding: 7px 15px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--green);
+  font-size: .7rem;
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.intro h2 {
+  margin-bottom: 24px;
+  font-size: clamp(2.4rem, 4.6vw, 4rem);
+  line-height: 1.08;
+}
+
+.lede {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin: 56px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  min-width: 0;
+  padding: 32px 28px 36px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--card);
+  box-shadow: 0 10px 30px rgb(23 33 29 / 5%);
+  text-align: center;
+}
+
+.number {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin: 0 auto 28px;
+  border-radius: 50%;
+  background: var(--green);
+  color: var(--lime);
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.card h3 {
+  margin: 0 0 18px;
+  color: var(--green);
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.card p {
+  max-width: 280px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: .95rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 900px) {
+  .section { padding-block: 72px; }
+  .steps { gap: 16px; }
+  .card { padding: 28px 20px; }
+}
+
+@media (max-width: 700px) {
+  .steps {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 480px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .section { padding-block: 52px; }
+  .eyebrow { margin-bottom: 20px; }
+  .intro h2 { font-size: clamp(2rem, 8.5vw, 3rem); }
+  .lede { font-size: 1rem; }
+  .steps { margin-top: 32px; }
+  .number { margin-bottom: 20px; }
+  .card h3 { margin-bottom: 12px; }
+}
